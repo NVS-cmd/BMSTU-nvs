@@ -3,6 +3,9 @@
         "iostream": "cpp",
         "vector": "cpp",
         "ostream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "chrono": "cpp",
+        "span": "cpp",
+        "type_traits": "cpp"
     }
 }

@@ -1,0 +1,21 @@
+date > report.txt
+cat report.txt
+rm report.txt
+ps aux | wc -l
+read -p "Введите 2 числа через пробел: " x1 x2
+((umn = x1 * x2))
+echo "$umn"
+while true; do
+{ read msg;
+echo "$msg" >>1.txt;
+echo "Сообщение получено"; } | nc -l 12345
+rm 1.txt
+done
+for i in {1..20}
+do
+	if (( i % 2 == 0 ))
+	then
+		echo "$i"
+	fi
+done
+

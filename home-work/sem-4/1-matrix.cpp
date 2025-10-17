@@ -2,49 +2,77 @@
 #include <vector>
 using namespace std;
 
-int main() {
-    int N = 0;
-    cout << "Введите размер квадратной матрицы: ";
-    cin >> N;
-    cout << "Заполните числами: ";
-    vector<vector<int>> A(N, vector<int>(N));
+bool Matrix(const vector<vector<int>>& A, const vector<vector<int>>& B) {
+    int N = A.size();
     for (int i = 0; i < N; i++)
         for (int j = 0; j < N; j++)
-            cin >> A[i][j];
+            if (A[i][j] != B[i][j]) return false;
+    return true;
+}
 
-// Отражения
-    vector<vector<int>> M0(N, vector<int>(N)); // обычная матрица
-    vector<vector<int>> M1(N, vector<int>(N)); // главная диагональ
-    vector<vector<int>> M2(N, vector<int>(N)); // побочная диагональ
-    vector<vector<int>> M3(N, vector<int>(N)); // вертикальная ось
-    vector<vector<int>> M4(N, vector<int>(N)); // горизонтальная ось
 
-    for (int i = 0; i < N; i++)
+void print(const vector<vector<int>>& M) {
+    int N = M.size();
+    for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            M0[i][j] = A[i][j];
-            M1[i][j] = A[j][i];
-            M2[i][j] = A[N - 1 - j][N - 1 - i];
-            M3[i][j] = A[i][N - 1 - j];
-            M4[i][j] = A[N - 1 - i][j];
+            cout << M[i][j] << " ";
         }
-
-    auto printMatrix = [&](const vector<vector<int>>& M) {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++)
-                cout << M[i][j] << " ";
-            cout << "\n";
+        cout << endl;
     }
-};
-    cout << "Вывод обычной матрицы: " << endl;
-    printMatrix(M0);
-    cout << "Вывод перевернутой матрицы относительно главной диагонали: " << endl;
-    printMatrix(M1);
-    cout << "Вывод перевернутой матрицы относительно побочной диагонали: " << endl;
-    printMatrix(M2);
-    cout << "Зеркальное отражение относительно вертикальной оси: " << endl;
-    printMatrix(M3);
-    cout << "Зеркальное отражение относительно горизонтальной оси: " << endl;
-    printMatrix(M4);
+    cout << endl;
+}
 
-    return 0;
+int main()
+{
+    int N;
+    cout << "Введите размер матрицы NхN: ";
+    cin >> N;
+    vector<vector<int>> A(N, vector<int>(N));
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++){
+            cout << "Введите элемент, находящийся на " << j + 1 << " строке и в " << i + 1 << " столбце: ";
+            cin >> A[i][j];
+        }
+    cout << "Ваша матрица: " << endl;
+    print(A);
+ 
+    vector<vector<int>> B(N, vector<int>(N));
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            B[i][j] = A[j][i];
+    cout << "Отражение относительно главной диагонали: " << endl;
+    print(B);
+
+    vector<vector<int>> C(N, vector<int>(N));
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            C[i][j] = A[N - 1 - j][N - 1 - i];
+    cout << "Отражение относительно побочной диагонали: " << endl;
+    print(C);
+
+    vector<vector<int>> D(N, vector<int>(N));
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            D[i][j] = A[i][N - 1 - j];
+    cout << "Отражение по вертикали: " << endl;
+    print(D);
+
+    vector<vector<int>> E(N, vector<int>(N));
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            E[i][j] = A[N - 1 - i][j];
+    cout << "Отражение по горизонтали: " << endl;
+    print(E);
+ 
+    bool found = false;
+    vector<vector<int>> mats[4] = {B, C, D, E};
+    for (int i = 0; i < 4; i++)
+        for (int j = i + 1; j < 4; j++)
+            if (Matrix(mats[i], mats[j])) {
+                cout << i + 1 << " " << j + 1 << endl;
+                found = true;
+            }
+    if (!found) cout << "NONE";
+
+
 }

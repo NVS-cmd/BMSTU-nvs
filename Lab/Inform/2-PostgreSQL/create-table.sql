@@ -41,3 +41,18 @@ VALUES (101,102),
 	(101,105),
 	(102,103),
 	(100,101);
+
+
+Запросы:
+SELECT (title, priority, due_date) FROM tasks;
+
+SELECT t.title, t.priority, t.due_date, t.status
+FROM tasks t
+JOIN task_assigments ta ON t.id = ta.task_id
+WHERE ta.user_id = 101;
+
+SELECT (title, priority, due_date) FROM tasks WHERE priority = 'Высокий' AND due_date < '2025-11-19';
+
+SELECT status, COUNT(*) AS task_count
+FROM tasks
+GROUP BY status;

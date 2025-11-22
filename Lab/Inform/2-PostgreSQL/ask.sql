@@ -1,48 +1,3 @@
-SELECT (title, priority, due_date) FROM tasks;
-
-SELECT t.title, t.priority, t.due_date, t.status
-FROM tasks t
-JOIN task_assigments ta ON t.id = ta.task_id
-WHERE ta.user_id = 101;
-
-SELECT (title, priority, due_date) FROM tasks WHERE priority = 'Высокий' AND due_date < '2025-11-19';
-
-SELECT status, COUNT(*) AS task_count
-FROM tasks
-GROUP BY status;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 5-1 
 SELECT title, priority, due_date FROM tasks;
 
@@ -74,14 +29,13 @@ WHERE (t.due_date < '22-11-2025');
 
 6-2
 
-SELECT t.title, t.status, t.id, ta.id 
-FROM tasks t
-JOIN task_assigments ta ON t.id = ta.task_id;
-UPDATE ta.tas
+UPDATE tasks
+SET status = 'Выполнена'
+WHERE id = 103;
 
-
-
-
+6-3
+DELETE FROM tasks
+WHERE id = 103;
 
 
 

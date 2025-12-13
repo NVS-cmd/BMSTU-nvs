@@ -1,0 +1,27 @@
+SELECT note_id, student_id, note_text
+FROM notes
+WHERE note_tsv @@ plainto_tsquery('russian', 'информатика');
+
+-- представление со средним баллом студента
+CREATE VIEW student_avg_grades AS
+SELECT
+    s.student_id,
+    s.full_name,
+    s.group_number,
+    AVG(g.grade) AS avg_grade
+FROM students s
+JOIN grades g ON g.student_id = s.student_id
+GROUP BY s.student_id, s.full_name, s.group_number;
+
+-- средний балл конкретного студента
+SELECT *
+FROM student_avg_grades
+WHERE student_id = 100;
+
+-- средний балл по предмету "Информатика"
+SELECT subj.subject_name,
+       AVG(g.grade) AS avg_grade
+FROM grades g
+JOIN subjects subj ON subj.subjects_id = g.subjects_id
+WHERE subj.subject_name = 'Информатика'
+GROUP BY subj.subject_name;

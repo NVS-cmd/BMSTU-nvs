@@ -1,0 +1,26 @@
+BEGIN;
+
+WITH new_st AS (
+    INSERT INTO students (full_name, group_number)
+    VALUES ('New Student', 'ИУ1')
+    RETURNING student_id
+)
+INSERT INTO grades (student_id, subjects_id, grade)
+SELECT ns.student_id,
+       subj.subjects_id,
+       8  -- или любая логика выставления оценок
+FROM new_st ns
+CROSS JOIN subjects subj;
+
+COMMIT;
+
+-- :id_here – это student_id исходного студента
+SELECT *
+FROM students s2
+WHERE s2.group_number = (
+        SELECT group_number
+        FROM students
+        WHERE student_id = :id_here
+      )
+  AND s2.student_id BETWEEN :id_here - 2 AND :id_here + 3
+ORDER BY s2.student_id;

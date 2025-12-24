@@ -1,3 +1,0 @@
-C:/NV/BMSTU/Program/Programming/Lab/Cpp-Database/build/CMakeFiles/my_app.dir
-C:/NV/BMSTU/Program/Programming/Lab/Cpp-Database/build/CMakeFiles/edit_cache.dir
-C:/NV/BMSTU/Program/Programming/Lab/Cpp-Database/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+C:/NV/BMSTU/Program/Programming/Lab/lab4-sql-cpp/build/CMakeFiles/my_app.dir
+C:/NV/BMSTU/Program/Programming/Lab/lab4-sql-cpp/build/CMakeFiles/edit_cache.dir
+C:/NV/BMSTU/Program/Programming/Lab/lab4-sql-cpp/build/CMakeFiles/rebuild_cache.dir
